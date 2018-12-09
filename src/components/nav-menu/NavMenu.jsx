@@ -5,7 +5,6 @@ import './NavMenu.css';
 class NavMenu extends React.Component {
 
 	render() {
-	
 		const listItems = [];
 
 		React.Children.forEach(this.props.children, (child, i) => {
