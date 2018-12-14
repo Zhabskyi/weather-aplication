@@ -1,36 +1,30 @@
 import React from 'react';
+import AuthService from '../authService/AuthService';
 
-const url = 'https://rest-node-course-api.herokuapp.com/auth/login';
+//const url = 'https://rest-node-course-api.herokuapp.com/auth/login';
 
 class LoginForm extends React.Component {
+	constructor() {
+		super();
+		this.AuthService = new AuthService();
+	}
+
   state = {
     email : '',
     password : ''
 	};
-	
-	LogIn  = (e) => {
+
+	handleFormLogin = (e) => {
 		e.preventDefault();
-		fetch(url, {
-			method: 'POST',// POST for login -> token 'asdasdasdasdasd23423423' -> save to local storage localStorage.set()
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(this.state),
-		})
-		.then(resp => resp.json())
-		.then(resp => { 
-			console.log(resp);
-			this.setToken(resp.token);
-		})
-		.catch(e => {
-			console.log(e);
-		});
+		this.AuthService.login(this.state);
+		if (this.AuthService.loggedIn()) {
+			this.AuthService.getPosts();
+			console.log(this.props.history);
+			console.log(this.AuthService.getPosts());
+		}
+
 	}
-
-	setToken(token) {
-		localStorage.setItem('token', token)
-}
-
+	
 	chnageHandler = (field) => {
 		return (e) => {
 			const value = e.target.value;
@@ -39,7 +33,7 @@ class LoginForm extends React.Component {
 	}
 
   render() {
-    return <form onSubmit={this.LogIn}>
+    return <form onSubmit={this.handleFormLogin}>
 		<div className='login__container'>
 			<label className='login__container__label' htmlFor='email'>E-mail</label>
 			<input className='login__container__input'

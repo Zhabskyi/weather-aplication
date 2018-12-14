@@ -1,29 +1,26 @@
 import React from 'react';
+import AuthService from '../authService/AuthService';
 
-const url = 'https://rest-node-course-api.herokuapp.com/auth/signup';
+//const url = 'https://rest-node-course-api.herokuapp.com/auth/signup';
 
 class SignUpForm extends React.Component {
+	constructor() {
+		super();
+		this.AuthService = new AuthService();
+	}
+
   state = {
     email: '',
     name: '',
     password: ''
 	};
-	
-	signUp  = (e) => {
+
+
+	handleFormSignIn = (e) => {
 		e.preventDefault();
-		console.log(e);
-		fetch(url, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(this.state),
-		}).then((resp) => {
-			console.log(resp)
-		}).catch(e => {
-			console.log(e);
-		});
+		this.AuthService.signIn(this.state);
 	}
+	
 
 	chnageHandler = (field) => {
 		return (e) => {
@@ -33,7 +30,7 @@ class SignUpForm extends React.Component {
 	}
 
   render() {
-    return <form onSubmit={this.signUp}>
+    return <form onSubmit={this.handleFormSignIn}>
       <div className='sign-in__container'>
         <label className='sign-in__container__label' htmlFor='email'>E-mail</label>
 				<input className='sign-in__container__input' 
