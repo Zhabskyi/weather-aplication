@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthService from '../authService/AuthService';
+import AuthService from '../../../commons/scripts/authService/AuthService';
 
 //const url = 'https://rest-node-course-api.herokuapp.com/auth/login';
 
