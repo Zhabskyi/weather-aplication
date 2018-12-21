@@ -7,47 +7,6 @@ class SignUp extends React.Component {
 		errors: [],
 	};
 
-	// emailLengthChecker = (e) => {
-	// 	const value = e.target.value;
-	// 	console.log(value.length);
-	// 	if ( value.length < 5 ) {
-	// 		this.inputClass += ' input-error';
-	// 		this.setState({errors: ['Field too short']})
-	// 		e.target.setCustomValidity('Have to be longer than 5 symbols');
-	// 		e.stopPropagation();
-	// 		//console.log(e.target);
-  //   } else {
-	// 		debugger;
-	// 	}
-	// 	return null;
-	// }
-
-	// nameLengthChecker = (e) => {
-	// 	const value = e.target.value;
-	// 	if ( value.length < 5 ) {
-	// 		this.inputClass += ' input-error';
-	// 		this.setState({errors: ['Field too short']})
-	// 		e.target.setCustomValidity('Have to be longer than 5 symbols');
-	// 		console.log(e.target);
-  //   } else {
-	// 		debugger;
-	// 	}
-	// 	return null;
-	// }
-
-	// passwordLengthChecker = (e) => {
-	// 	const value = e.target.value;
-	// 	if ( value.length < 5 ) {
-	// 		this.inputClass += ' input-error';
-	// 		this.setState({errors: ['Field too short']})
-	// 		e.target.setCustomValidity('Have to be longer than 5 symbols');
-	// 		console.log(e.target);
-  //   } else {
-	// 		debugger;
-	// 	}
-	// 	return null;
-	// }
-
 
 
 	onSignUp = userData => {
