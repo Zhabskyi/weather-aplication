@@ -18,7 +18,7 @@ class App extends Component {
 					<Link to="/login">Login</Link>
 				</NavMenu>
 				<Route path="/sign-up" render={(props) => {
-					debugger;
+	//				debugger;
 					return <SignUp {...props} authService={authService} />
 				}}/>
 				<Route path ="/login" render={({props}) =>  <Login {...props} authService={authService} />} />
