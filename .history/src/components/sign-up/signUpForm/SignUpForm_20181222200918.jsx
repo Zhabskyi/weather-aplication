@@ -1,7 +1,6 @@
 import React from "react";
 
 import Input from "../../input/Input";
-import Button, {TYPES} from '../../button/Button';
 
 const FORM_FIELDS = {
 	isEmailFieldValid: 'isEmailFieldValid',
@@ -82,7 +81,9 @@ class SignUpForm extends React.Component {
 					id="password"
 					valid={this.state[FORM_FIELDS.isPasswordValid]}
         />
-        <Button title={'Sign Up!'} type={TYPES.warn}/>
+        <button type="Submit" className="sign-in__button">
+          SIGN UP
+        </button>
       </form>
     );
   }

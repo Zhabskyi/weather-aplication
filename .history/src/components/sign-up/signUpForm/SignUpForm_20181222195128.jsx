@@ -1,30 +1,24 @@
 import React from "react";
+import classnames from "classnames";
 
 import Input from "../../input/Input";
-import Button, {TYPES} from '../../button/Button';
-
-const FORM_FIELDS = {
-	isEmailFieldValid: 'isEmailFieldValid',
-	isPasswordValid: 'isPasswordValid',
-	isNameValid: 'isNameValid'
-}
 
 class SignUpForm extends React.Component {
   state = {
     email: "",
     name: "",
     password: "",
-    [FORM_FIELDS.isEmailFieldValid]: true,
-    [FORM_FIELDS.isPasswordValid]: true,
-    [FORM_FIELDS.isNameValid]: true
+    isEmail: false,
+    isName: false,
+    isPassword: false
   };
 
   handleFormSignIn = e => {
     e.preventDefault();
     if (
-      this.validator(FORM_FIELDS.isEmailFieldValid) &&
-      this.validator(FORM_FIELDS.isPasswordValid) &&
-      this.validator(FORM_FIELDS.isNameValid)
+      this.lengthChecker("isEmail") &&
+      this.lengthChecker("isName") &&
+      this.lengthChecker("isPassword")
     ) {
       this.props.onSignUp(this.state);
     }
@@ -40,49 +34,68 @@ class SignUpForm extends React.Component {
   validator = field => {
     return e => {
       if (e.target.value.length < 5) {
-        const value = false;
-        this.setState(oldState => ({ ...oldState,  [field]: value }));
+        const value = true;
+        this.setState(oldState =>
+          Object.assign(
+            {},
+            oldState,
+            { [field]: value },
+            { errors: [`${field} too short`] }
+          )
+        );
         e.target.setCustomValidity("Have to be longer than 5 symbols");
       } else {
-				const value = true;
-        this.setState(oldState => ({ ...oldState,  [field]: value }));
+        const value = false;
+        this.setState({ [field]: value });
         e.target.setCustomValidity("");
       }
       return this.state.field;
     };
   };
 
+  renderErrors = () => {
+    if (this.props.errors.length > 0) {
+      return this.props.errors.map(e => {
+        console.log(e);
+        return <div>{e.msg}</div>;
+      });
+    }
+    return null;
+  };
+
   render() {
+    const { isEmail, isName, isPassword } = this.state;
+    // let inputPasswordClass = classnames('sign-in__container__input', {'input-error': isPassword});
+
     return (
       <form onSubmit={this.handleFormSignIn}>
         <Input
           title="email"
           onChange={this.chnageHandler("email")}
-          onBlur={this.validator(FORM_FIELDS.isEmailFieldValid)}
-					value={this.state.email}
-					valid={this.state[FORM_FIELDS.isEmailFieldValid]}
+          onBlur={this.validator("isEmail")}
+          value={this.state.email}
           type="email"
-					id="email"
+          id="email"
         />
         <Input
           title="name"
           onChange={this.chnageHandler("name")}
-          onBlur={this.validator(FORM_FIELDS.isNameValid)}
+          onBlur={this.validator("isName")}
           value={this.state.name}
           type="text"
-					id="name"
-					valid={this.state[FORM_FIELDS.isNameValid]}
+          id="name"
         />
         <Input
           title="password"
           onChange={this.chnageHandler("password")}
-          onBlur={this.validator(FORM_FIELDS.isPasswordValid)}
+          onBlur={this.validator("isPassword")}
           value={this.state.password}
           type="password"
-					id="password"
-					valid={this.state[FORM_FIELDS.isPasswordValid]}
+          id="password"
         />
-        <Button title={'Sign Up!'} type={TYPES.warn}/>
+        <button type="Submit" className="sign-in__button">
+          SIGN UP
+        </button>
       </form>
     );
   }

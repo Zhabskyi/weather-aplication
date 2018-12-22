@@ -18,7 +18,6 @@ class SignUp extends React.Component {
 		})
 		.catch((e) => {
 		//	debugger;
-			console.log(e);
 			this.setState({errors: [...e.payload]})
 		})
 	};

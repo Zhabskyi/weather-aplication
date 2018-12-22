@@ -1,0 +1,15 @@
+.input {
+    width: 100%;
+    background: green;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.input__input {
+    width: 100%;
+}
+
+.input_invalid {
+    background: red;
+}

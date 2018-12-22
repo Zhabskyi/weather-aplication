@@ -82,7 +82,7 @@ class SignUpForm extends React.Component {
 					id="password"
 					valid={this.state[FORM_FIELDS.isPasswordValid]}
         />
-        <Button title={'Sign Up!'} type={TYPES.warn}/>
+        <Button title={'Sign Up!'} type={TYPES.primary}/>
       </form>
     );
   }

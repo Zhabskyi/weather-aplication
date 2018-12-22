@@ -1,7 +1,6 @@
 import React from "react";
 
 import Input from "../../input/Input";
-import Button, {TYPES} from '../../button/Button';
 
 const FORM_FIELDS = {
 	isEmailFieldValid: 'isEmailFieldValid',
@@ -22,9 +21,9 @@ class SignUpForm extends React.Component {
   handleFormSignIn = e => {
     e.preventDefault();
     if (
-      this.validator(FORM_FIELDS.isEmailFieldValid) &&
-      this.validator(FORM_FIELDS.isPasswordValid) &&
-      this.validator(FORM_FIELDS.isNameValid)
+      this.lengthChecker("isEmail") &&
+      this.lengthChecker("isName") &&
+      this.lengthChecker("isPassword")
     ) {
       this.props.onSignUp(this.state);
     }
@@ -52,15 +51,25 @@ class SignUpForm extends React.Component {
     };
   };
 
+  renderErrors = () => {
+    if (this.props.errors.length > 0) {
+      return this.props.errors.map(e => {
+        console.log(e);
+        return <div>{e.msg}</div>;
+      });
+    }
+    return null;
+  };
+
   render() {
     return (
       <form onSubmit={this.handleFormSignIn}>
         <Input
           title="email"
           onChange={this.chnageHandler("email")}
-          onBlur={this.validator(FORM_FIELDS.isEmailFieldValid)}
+          onBlur={this.validator(FORM_FIELDS.isNameValid)}
 					value={this.state.email}
-					valid={this.state[FORM_FIELDS.isEmailFieldValid]}
+					valid={this.state[FORM_FIELDS.isNameValid]}
           type="email"
 					id="email"
         />
@@ -82,7 +91,9 @@ class SignUpForm extends React.Component {
 					id="password"
 					valid={this.state[FORM_FIELDS.isPasswordValid]}
         />
-        <Button title={'Sign Up!'} type={TYPES.warn}/>
+        <button type="Submit" className="sign-in__button">
+          SIGN UP
+        </button>
       </form>
     );
   }

@@ -1,0 +1,8 @@
+.input {
+    width: 100%;
+    background: green;
+}
+
+.input_invalid {
+    background: red;
+}

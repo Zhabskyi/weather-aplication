@@ -1,6 +1,5 @@
 import React from 'react';
 import AuthService from '../../../commons/scripts/authService/AuthService';
-import Button, { TYPES } from '../../button/Button';
 
 //const url = 'https://rest-node-course-api.herokuapp.com/auth/login';
 
@@ -51,7 +50,7 @@ class LoginForm extends React.Component {
 				type="password" 
 				id='password'/>
 		</div>
-		<Button title='Log in'/>
+		<button type='Submit' className='login__button'>LOGIN</button>
 	</form>
   }
 }
