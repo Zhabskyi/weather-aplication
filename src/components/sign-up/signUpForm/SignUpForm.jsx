@@ -13,7 +13,9 @@ class SignUpForm extends React.Component {
 
 	handleFormSignIn = (e) => {
 		e.preventDefault();
-		if (this.emailLengthChecker && this.nameLengthChecker && this.passwordLengthChecker) {
+		if (this.lengthChecker("isEmail") 
+				&& this.lengthChecker("isName") 
+				&& this.lengthChecker("isPassword")) {
 			this.props.onSignUp(this.state);
 		}
 	}
@@ -26,51 +28,19 @@ class SignUpForm extends React.Component {
 		}
 	}
 
-	emailLengthChecker = (e) => {
-		const value = e.target.value;
-		console.log(e.target);
-		if ( value.length < 5 ) {
-			const isEmail = true;
-    	this.setState(state => Object.assign({}, state, {isEmail}));
-			//this.setState({errors: ['Field too short']})
-			e.target.setCustomValidity('Have to be longer than 5 symbols');
-			console.log(e.target);
-    } else {
-			const isEmail = false;
-			this.setState(state => Object.assign({}, state, {isEmail}));
-			e.target.setCustomValidity('');
-		}
-		return this.state.isEmail;
-	}
-
-	nameLengthChecker = (e) => {
-		if ( e.target.value.length < 5 ) {
-			const isName = true;
-    	this.setState(state => Object.assign({}, state, {isName}));
-			//this.setState({errors: ['Field too short']})
-			e.target.setCustomValidity('Have to be longer than 5 symbols');
-			console.log(e.target);
-    } else {
-			const isName = false;
-			this.setState(state => Object.assign({}, state, {isName}));
-			e.target.setCustomValidity('');
-		}
-		return this.state.isName;
-	}
-
-	passwordLengthChecker = (e) => {
-		if ( e.target.value.length < 5 ) {
-			const isPassword = true;
-    	this.setState(state => Object.assign({}, state, {isPassword}));
-			//this.setState({errors: ['Field too short']})
-			e.target.setCustomValidity('Have to be longer than 5 symbols');
-			console.log(e.target);
-    } else {
-			const isPassword = false;
-			this.setState(state => Object.assign({}, state, {isPassword}));
-			e.target.setCustomValidity('');
-		}
-		return this.state.isPassword;
+	lengthChecker = (field) => {
+		return (e) => {
+			if ( e.target.value.length < 5 ) {
+				const value = true;
+				this.setState((oldState) => Object.assign({}, oldState, {[field]: value}, {errors: [ `${field} too short`]}));
+				e.target.setCustomValidity('Have to be longer than 5 symbols');
+			} else {
+				const value = false;
+				this.setState({[field]: value});
+				e.target.setCustomValidity('');
+			}
+			return this.state.field;
+			}
 	}
 
 	renderErrors =() => {
@@ -100,7 +70,7 @@ class SignUpForm extends React.Component {
 		if (this.state.isPassword) {
       inputPasswordClass += ' input-error';
 		}
-
+	
 		//console.log(this.props.errors);
 		//console.log(this.props.inputClass);
     return <form onSubmit={this.handleFormSignIn}>
@@ -108,7 +78,7 @@ class SignUpForm extends React.Component {
         <label className='sign-in__container__label' htmlFor='email'>E-mail</label>
 				<input className={inputEmailClass}
 					onChange={this.chnageHandler('email')} 
-					onBlur={this.emailLengthChecker}
+					onBlur={this.lengthChecker('isEmail')}
 					value={this.state.email} 
 					type="email" 
 					id='email'/>
@@ -117,7 +87,7 @@ class SignUpForm extends React.Component {
         <label className='sign-in__container__label' htmlFor='name'>Name</label>
 				<input className={inputNameClass} 
 					onChange={this.chnageHandler('name')}
-					onBlur={this.nameLengthChecker}
+					onBlur={this.lengthChecker('isName')}
 					value={this.state.name} 
 					type="text" 
 					id='name'/>
@@ -126,7 +96,7 @@ class SignUpForm extends React.Component {
         <label className='sign-in__container__label' htmlFor='password'>Password</label>
 				<input className={inputPasswordClass}
 					onChange={this.chnageHandler('password')}
-					onBlur={this.passwordLengthChecker}
+					onBlur={this.lengthChecker('isPassword')}
 					value={this.state.password} 
 					type="password" 
 					id='password'/>

@@ -12,7 +12,7 @@ class NavMenu extends React.Component {
 				key: i,
 				className: 'nav-bar__link'
 		});
-			listItems.push(<li className="nav-bar__list__item">
+			listItems.push(<li className="nav-bar__list__item" key={link.key+100}>
 				{ link }
 			</li>);
 	});
