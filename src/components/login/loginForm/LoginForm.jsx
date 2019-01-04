@@ -1,5 +1,7 @@
 import React from 'react';
+
 import AuthService from '../../../commons/scripts/authService/AuthService';
+import Input from "../../input/Input";
 import Button, { TYPES } from '../../button/Button';
 
 //const url = 'https://rest-node-course-api.herokuapp.com/auth/login';
@@ -35,23 +37,23 @@ class LoginForm extends React.Component {
 
   render() {
     return <form onSubmit={this.handleFormLogin}>
-		<div className='login__container'>
-			<label className='login__container__label' htmlFor='email'>E-mail</label>
-			<input className='login__container__input'
-				onChange={this.chnageHandler('email')} 
-				value={this.state.email}
-				type="email" 
-				id='email'/>
-		</div>
-		<div className='login__container'>
-			<label className='login__container__label' htmlFor='password'>Password</label>
-			<input className='login__container__input'
-				onChange={this.chnageHandler('password')}
-				value={this.state.password} 
-				type="password" 
-				id='password'/>
-		</div>
-		<Button title='Log in'/>
+		<Input
+			title="E-mail"
+			onChange={this.chnageHandler('email')} 
+			value={this.state.email}
+			valid={true}
+			type="email" 
+			id='email' 
+		/>
+		<Input
+			title="Password"
+			onChange={this.chnageHandler('password')} 
+			value={this.state.password}
+			valid={true}
+			type="password" 
+			id='password' 
+		/>
+		<Button title={'Log in'} type={ TYPES.default}/>
 	</form>
   }
 }

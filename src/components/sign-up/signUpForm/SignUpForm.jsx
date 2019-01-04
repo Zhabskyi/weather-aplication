@@ -1,7 +1,7 @@
 import React from "react";
 
 import Input from "../../input/Input";
-import Button, {TYPES} from '../../button/Button';
+import Button, { TYPES } from '../../button/Button';
 
 const FORM_FIELDS = {
 	isEmailFieldValid: 'isEmailFieldValid',
@@ -56,7 +56,7 @@ class SignUpForm extends React.Component {
     return (
       <form onSubmit={this.handleFormSignIn}>
         <Input
-          title="email"
+          title="E-mail"
           onChange={this.chnageHandler("email")}
           onBlur={this.validator(FORM_FIELDS.isEmailFieldValid)}
 					value={this.state.email}
@@ -65,7 +65,7 @@ class SignUpForm extends React.Component {
 					id="email"
         />
         <Input
-          title="name"
+          title="Name"
           onChange={this.chnageHandler("name")}
           onBlur={this.validator(FORM_FIELDS.isNameValid)}
           value={this.state.name}
@@ -74,7 +74,7 @@ class SignUpForm extends React.Component {
 					valid={this.state[FORM_FIELDS.isNameValid]}
         />
         <Input
-          title="password"
+          title="Password"
           onChange={this.chnageHandler("password")}
           onBlur={this.validator(FORM_FIELDS.isPasswordValid)}
           value={this.state.password}
@@ -82,7 +82,7 @@ class SignUpForm extends React.Component {
 					id="password"
 					valid={this.state[FORM_FIELDS.isPasswordValid]}
         />
-        <Button title={'Sign Up!'} type={TYPES.warn}/>
+        <Button title={'Sign Up!'} type={TYPES.default}/>
       </form>
     );
   }

@@ -1,15 +1,24 @@
 .input {
     width: 100%;
-    background: green;
     display: flex;
     flex-direction: column;
     margin: 10px 0;
 }
 
 .input__native-input {
-    width: 100%;
+	width:100%;
+	outline: none;
+	padding: 5px;
+	border: 1px solid rgb(39, 27, 0);
+	border-radius: 5px;
 }
 
 .input_invalid {
     background: red;
+}
+
+.input__label {
+	display: block;
+	padding: 5px;
+	width: 100%;
 }

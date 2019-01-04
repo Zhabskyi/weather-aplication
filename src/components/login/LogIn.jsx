@@ -4,7 +4,7 @@ import LoginForm from './loginForm/LoginForm';
 
 const Login = () => {
 	return (<div className='login login-hidden'>
-		<LoginForm />
+		<LoginForm  />
 	</div>)
 }
 
