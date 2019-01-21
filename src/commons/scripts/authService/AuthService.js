@@ -47,32 +47,17 @@ class AuthService {
       },
       body: JSON.stringify(state)
     })
-      .then(resp => resp.json())
+			.then(resp => resp.json())
       .then(resp => {
-        console.log(resp);
+        console.log('>>>', resp);
         this.setToken(resp.token);
-      })
+			})
       .catch(e => {
         console.log(e);
       });
   };
 
-  getPosts = () => {
-    fetch(`${this.domain}/feed/posts`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${this.getToken()}`,
-        "Content-Type": "application/json"
-      }
-    })
-      .then(resp => resp.json())
-      .then(resp => {
-        console.log(resp);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
+
 
   setToken(token) {
     console.log("SET TOKEN TO STORAGE");

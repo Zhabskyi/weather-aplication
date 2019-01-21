@@ -2,9 +2,9 @@ import React from 'react';
 import './Login.css';
 import LoginForm from './loginForm/LoginForm';
 
-const Login = () => {
+const Login = (props) => {
 	return (<div className='login login-hidden'>
-		<LoginForm  />
+		<LoginForm  authService={props.authService}/>
 	</div>)
 }
 

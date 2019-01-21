@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import NavMenu from '../components/nav-menu/NavMenu';
 import SignUp from '../components/sign-up/SignUp';
 import Login from '../components/login/LogIn';
+import Feed from '../components/feed/Feed';
+import PrivateRoute from '../components/private-root/PrivateRoute';
 import './App.css';
 import AuthService from '../commons/scripts/authService/AuthService';
 
@@ -10,6 +12,12 @@ const authService = new AuthService();
 
 class App extends Component {
   render() { 
+		let privetRoute = null;
+		if (authService.loggedIn()) {
+			privetRoute = <Route path='/posts' render={(props) =>  {
+				return <Feed {...props} authService={authService} /> 
+			}} />
+		}
 		return (
 		<Router>
 			<div className="page-wrapper">
@@ -20,7 +28,15 @@ class App extends Component {
 				<Route path="/sign-up" render={(props) => {
 					return <SignUp {...props} authService={authService} />
 				}}/>
-				<Route path ="/login" render={({props}) =>  <Login {...props} authService={authService} />} />
+				<Route path ="/login" render={(props) =>  {
+					return <Login {...props} authService={authService} /> 
+				}} />
+				{privetRoute}
+				{/* <Route path='/posts' render={(props) =>  {
+					return <Feed {...props} authService={authService} /> 
+				}} /> */}
+
+				<PrivateRoute path='/posts'  component={Feed} authService={authService}/>  
 			</div>
 		</Router>
 	);
