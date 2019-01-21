@@ -12,12 +12,6 @@ const authService = new AuthService();
 
 class App extends Component {
   render() { 
-		let privetRoute = null;
-		if (authService.loggedIn()) {
-			privetRoute = <Route path='/posts' render={(props) =>  {
-				return <Feed {...props} authService={authService} /> 
-			}} />
-		}
 		return (
 		<Router>
 			<div className="page-wrapper">
@@ -31,12 +25,8 @@ class App extends Component {
 				<Route path ="/login" render={(props) =>  {
 					return <Login {...props} authService={authService} /> 
 				}} />
-				{privetRoute}
-				{/* <Route path='/posts' render={(props) =>  {
-					return <Feed {...props} authService={authService} /> 
-				}} /> */}
 
-				<PrivateRoute path='/posts'  component={Feed} authService={authService}/>  
+				<PrivateRoute path='/posts' component={Feed} authService={authService}/>  
 			</div>
 		</Router>
 	);

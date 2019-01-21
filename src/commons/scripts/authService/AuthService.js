@@ -38,23 +38,32 @@ class AuthService {
       .then(this.onValidationSuccess)
       .catch(this.onValidationError);
   };
-
-  login = state => {
-    return fetch(`${this.domain}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(state)
+  /**
+   * @param {Object} credentials 
+   * @param {string} credentials.email
+   * @param {string} credentials.password
+   * */
+  login = credentials => {
+    return new Promise((resolve, reject) => {
+      fetch(`${this.domain}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(credentials)
+      })
+        .then(resp => resp.json())
+        .then(resp => {
+          if(resp.token) {
+            this.setToken(resp.token);
+            resolve();
+          }
+          reject(new Error(resp.message));
+        })
+        .catch(e => {
+          reject(new Error(e));
+        });
     })
-			.then(resp => resp.json())
-      .then(resp => {
-        console.log('>>>', resp);
-        this.setToken(resp.token);
-			})
-      .catch(e => {
-        console.log(e);
-      });
   };
 
 
@@ -64,14 +73,9 @@ class AuthService {
     localStorage.setItem("token", token);
   }
 
-  getToken() {
-    return localStorage.getItem("token");
-  }
+  getToken = () => localStorage.getItem("token");
 
-  loggedIn() {
-    const token = this.getToken();
-    return !!token;
-  }
+  loggedIn = () => !!this.getToken();
 }
 
 export default AuthService;

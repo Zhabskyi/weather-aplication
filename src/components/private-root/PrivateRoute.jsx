@@ -1,29 +1,17 @@
 import React from 'react';
-import { BrowserRouter as Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 
-
-//import Feed from '../feed/Feed';
-
-
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ component: Component, ...restProps }) => {
 	return (
-		<Route {...rest}
-		
+		<Route {...restProps}
 			render = {(props) => {
-				return <Component {...props} authService={props.authService} />
-			// (props) =>
-			// 	props.authService.loggedIn
-			// 		 ? 
-      //     	(<Component {...props} authService={props.authService}/>)
-			// 		 : 
-      //     	(<Redirect
-      //       to={{
-      //         pathname: "/login",
-      //         state: { from: props.location }
-      //       }} />)
-				} 
-			}
-			/>
+				if(restProps.authService.loggedIn()) {
+					return <Component {...props} authService={restProps.authService} />
+				} else {
+					return <Redirect to={'/login'} />
+				}
+			} 
+		}/>
   );
 }
 
