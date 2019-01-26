@@ -1,0 +1,19 @@
+.Feed {
+	position: relative;
+}
+
+.Feed h3 {
+	text-align: center;
+}
+@media (max-width: 424px) {
+	.Feed h3 {
+		padding-top: 50px;
+	}
+}
+
+.btn {
+	position: absolute;
+	font-size: 14px;
+	top: 0px;
+	right: 10px;
+}

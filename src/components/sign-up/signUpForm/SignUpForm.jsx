@@ -1,7 +1,7 @@
 import React from "react";
 
 import Input from "../../input/Input";
-import Button, { TYPES } from '../../button/Button';
+import Button, { TYPES } from '../../UI/button/Button';
 
 const FORM_FIELDS = {
 	isEmailFieldValid: 'isEmailFieldValid',

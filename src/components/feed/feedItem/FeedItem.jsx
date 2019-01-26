@@ -1,22 +1,30 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import classes from './FeedItem.module.css';
+
+import Button, { TYPES } from '../../UI/button/Button';
 
 const FeedItem = (props) => {
-	console.log(props);
+	const date = new Date(props.date).toLocaleString();
 	return (
-		<div id={props.id}>
+		<div className={classes.FeedItem} id={props.id}>
 			<div>
-				<h1>{props.title}</h1>
+				<h4>{props.title}</h4>
 				<p>{props.content}</p>
 			</div>
-			<div>
-				<span className = "">{props.name}</span>
-				<span className = "">{Date(props.date)}</span>
+			<div className={classes.Author}>
+				<span>{props.name}</span>
+				<span>{date}</span>
 			</div>
-			<div>
-				<button 
-					onClick={props.deleteComment}
-					className=''>DELETE</button>
+			<div className={classes.buttons}>
+			<Button 
+				title={'EDIT'} 
+				type={ TYPES.primary }
+				onClick={props.editComment}/>
+			<Button 
+				title={'DELETE'} 
+				type={ TYPES.warn }
+				onClick={props.deleteComment}/>
 			</div>
 			
 		</div>

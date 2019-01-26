@@ -3,7 +3,8 @@ import React from 'react';
 
 //import AuthService from '../../../commons/scripts/authService/AuthService';
 import Input from "../../input/Input";
-import Button, { TYPES } from '../../button/Button';
+import Button, { TYPES } from '../../UI/button/Button';
+import Spinner from '../../UI/Spinner/Spinner';
 
 //const url = 'https://rest-node-course-api.herokuapp.com/auth/login';
 
@@ -13,12 +14,14 @@ export default class LoginForm extends React.Component {
 		this.redirect = null;
 		this.state = {
 			email : '',
-			password : ''
+			password : '',
+			loading: false
 		}
 	}
 
 	handleFormLogin = async (e) => {
 		e.preventDefault();
+		this.setState({loading: true});
 		try {
 			await this.props.authService.login(this.state);
 			this.props.onSuccess();
@@ -35,7 +38,13 @@ export default class LoginForm extends React.Component {
 	}
 
   render() {
-    return ( <div>
+		let spinner = null;
+		if (this.state.loading) {
+			spinner = <Spinner />;
+		}
+    return ( 
+			<React.Fragment>
+				{spinner}
 			<form onSubmit={this.handleFormLogin}>
 				<Input
 					title="E-mail"
@@ -55,7 +64,7 @@ export default class LoginForm extends React.Component {
 				/>
 				<Button title={'Log in'} type={ TYPES.default}/>
 			</form>
-			</div>
+			</React.Fragment>
 		);
 		}
 	}

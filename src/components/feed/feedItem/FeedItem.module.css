@@ -1,0 +1,42 @@
+
+.FeedItem {
+	margin: 20px auto;
+	width: 75%;
+	text-align: center;
+	box-shadow: 0 2px 3px #ccc;
+	border: 1px solid #eee;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.FeedItem h4 {
+	margin-bottom: 10px;
+}
+
+.Author {
+	display: flex;
+	justify-content: flex-end;
+	font-size: 12px;
+}
+
+.Author span {
+	margin: 10px;
+}
+
+.Author span:first-child {
+	font-weight: 700;
+}
+
+.buttons {
+	display: flex;
+	justify-content: flex-end;
+}
+
+
+
+
+@media (min-width: 1024px) {
+	.FeedItem {
+		width: 800px;
+	}
+}

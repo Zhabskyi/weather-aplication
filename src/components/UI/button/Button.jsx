@@ -10,13 +10,13 @@ export const TYPES = {
 
 export const Button = props => {
     const classNames = classnames('btn', {
-        'btn_default': props.type === TYPES.default || true,
+        'btn_default': props.type === TYPES.default,
         'btn_primary': props.type === TYPES.primary,
-        'btn_warn': props.type === TYPES.warn
+				'btn_warn': props.type === TYPES.warn,
     });
 
     return <button
-        className={classNames}
+        className={classNames + ' ' + props.className}
         type={props.type || 'submit'}
         onClick={props.onClick}
         >{props.title}</button>
